@@ -42,18 +42,17 @@ app.get('/profile', (req, res) => {
     let VERIFY_TOKEN = "x9hx3TQBmB";
       
     // Parse the query params
-    let mode = req.query['hub.mode'];
-    let token = req.query['hub.verify_token'];
-    let challenge = req.query['hub.challenge'];
+    let mode = req.query['mode'];
+    let token = req.query['verify_token'];
       
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
       // Checks the mode and token sent is correct
-      if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+      if (mode === 'all' && token === VERIFY_TOKEN) {
         
         // Responds with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
-        res.status(200).send(challenge);
+        res.status(200).send('Hello World');
       
       } else {
         // Responds with '403 Forbidden' if verify tokens do not match
