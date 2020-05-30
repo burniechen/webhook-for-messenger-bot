@@ -52,7 +52,7 @@ app.post('/profile', (req, res) => {
 app.get('/profile', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "x9hx3TQBmB";
+    let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
       
     // Parse the query params
     let mode = req.query['mode'];
@@ -61,7 +61,7 @@ app.get('/profile', (req, res) => {
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
       // Checks the mode and token sent is correct
-      if (mode === 'all' && token === VERIFY_TOKEN) {
+      if (mode === 'all' && token === PAGE_ACCESS_TOKEN) {
         
         // Responds with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
