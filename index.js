@@ -52,7 +52,7 @@ app.post('/profile', (req, res) => {
 app.get('/profile', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
+    let VERIFY_TOKEN = "x9hx3TQBmB";
       
     // Parse the query params
     let mode = req.query['mode'];
@@ -61,7 +61,7 @@ app.get('/profile', (req, res) => {
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
       // Checks the mode and token sent is correct
-      if (mode === 'all' && token === PAGE_ACCESS_TOKEN) {
+      if (mode === 'all' && token === VERIFY_TOKEN) {
         
         // Responds with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
@@ -99,7 +99,7 @@ function handlePostback(sender_psid, received_postback) {
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
-    let VERIFY_TOKEN = "x9hx3TQBmB";
+    let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
     console.log(response);
 
     // Construct the message body
@@ -113,7 +113,7 @@ function callSendAPI(sender_psid, response) {
     // Send the HTTP request to the Messenger Platform
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": VERIFY_TOKEN},
+      "qs": { "access_token": PAGE_ACCESS_TOKEN},
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
