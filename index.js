@@ -52,7 +52,7 @@ app.post('/profile', (req, res) => {
 app.get('/profile', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "x9hx3TQBmB";
+    let VERIFY_TOKEN = <VERIFY_TOKEN>;
       
     // Parse the query params
     let mode = req.query['mode'];
@@ -140,7 +140,7 @@ function handlePostback(sender_psid, received_postback) {
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
-    let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
+    let PAGE_ACCESS_TOKEN = <PAGE_ACCESS_TOKEN>;
     console.log(response);
 
     // Construct the message body
