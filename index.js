@@ -132,23 +132,22 @@ function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
 	if (payload) {
 		response = {
-			"recipient":{
-			"id":sender_psid
-			},
-			"message":{
-				"attachment":{
-					"type":"template",
-					"payload":{
-						"template_type":"button",
-						"text":"Try the postback button!",
-						"buttons":[
-							{
-								"type":"postback",
-								"title":"Postback Button",
-								"payload":"Postback_button"
-							}
-						]
-					}
+			"attachment":{
+				"type":"template",
+				"payload":{
+					"template_type":"button",
+					"buttons":[
+						{
+							"type":"postback",
+							"title":"庫存查詢",
+							"payload":"items_search"
+						},
+						{
+							"type":"postback",
+							"title":"圖表查詢",
+							"payload":"charts_search"
+						}
+					]
 				}
 			}
 		}
