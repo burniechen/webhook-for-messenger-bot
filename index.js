@@ -131,7 +131,7 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-	if (payload === '<GET_STARTED_PAYLOAD>') {
+	if (payload === '<postback_payload>') {
 		console.log("callFastReply");
 		send = false;
 		callFastReply(sender_psid);
