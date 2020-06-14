@@ -132,16 +132,9 @@ function handlePostback(sender_psid, received_postback) {
     if (payload) {
 		// get start!!
 		response = {
-			{
-				"type": "postback",
-				"title": "庫存查詢",
-				"payload": "item_search"
-			},
-			{
-				"type": "postback",
-				"title": "圖表查詢",
-				"payload": "highchart_search"
-			}
+			"type": "postback",
+			"title": "庫存查詢",
+			"payload": "item_search"
 		}
     }
     else if (payload === 'yes') {
