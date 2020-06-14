@@ -18,7 +18,8 @@ app.post('/profile', (req, res) => {
   
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
-  
+      getStart();
+      console.log('get start OK!!');
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
             // Gets the body of the webhook event
@@ -66,8 +67,7 @@ app.get('/profile', (req, res) => {
         // Responds with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
         res.status(200).send('Hello World');
-        getStart();
-        console.log('get start OK!!');
+      
       } else {
         // Responds with '403 Forbidden' if verify tokens do not match
         res.sendStatus(403);      
@@ -168,7 +168,7 @@ function callSendAPI(sender_psid, response) {
 }
 
 
-function getStart() {
+function getStart(response) {
   let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
 
   // Construct the message body
