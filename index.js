@@ -124,28 +124,17 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
-    let response;
+	let response;
+	let send = true;
   
     // Get the payload for the postback
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
 	if (payload === '<GET_STARTED_PAYLOAD>') {
-		response = {
-			"text": "Pick a color:",
-			"quick_replies":[
-				{
-					"content_type":"text",
-					"title":"Red",
-					"payload":"<POSTBACK_PAYLOAD>",
-				},
-				{
-					"content_type":"text",
-					"title":"Green",
-					"payload":"<POSTBACK_PAYLOAD>",
-				}
-			]
-		}
+		console.log("callFastReply");
+		send = false;
+		callFastReply(sender_psid);
 	}
 	else if(payload === 'yes') {
         response = { "text": "Thanks!" }
@@ -154,7 +143,7 @@ function handlePostback(sender_psid, received_postback) {
         response = { "text": "Oops, try sending another image." }
     }
     // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
+    if (send) callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API
