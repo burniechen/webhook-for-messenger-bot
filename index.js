@@ -18,8 +18,7 @@ app.post('/profile', (req, res) => {
   
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
-      getStart();
-      console.log('get start OK!!');
+  
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
             // Gets the body of the webhook event
@@ -165,30 +164,4 @@ function callSendAPI(sender_psid, response) {
         console.error("Unable to send message:" + err);
       }
     }); 
-}
-
-
-function getStart(response) {
-  let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
-
-  // Construct the message body
-  let request_body = { 
-    "get_started":{
-      "payload":"<GET_STARTED_PAYLOAD>"
-    }
-  }
-
-  // Send the HTTP request to the Messenger Platform
-  request({
-    "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": PAGE_ACCESS_TOKEN},
-    "method": "POST",
-    "json": request_body
-  }, (err, res, body) => {
-    if (!err) {
-      console.log('Get Start!')
-    } else {
-      console.error("Unable to get start:" + err);
-    }
-  }); 
 }
