@@ -52,7 +52,7 @@ app.post('/profile', (req, res) => {
 app.get('/profile', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = <VERIFY_TOKEN>;
+    let VERIFY_TOKEN = "x9hx3TQBmB";
       
     // Parse the query params
     let mode = req.query['mode'];
@@ -66,7 +66,8 @@ app.get('/profile', (req, res) => {
         // Responds with the challenge token from the request
         console.log('WEBHOOK_VERIFIED');
         res.status(200).send('Hello World');
-      
+        getStart();
+        console.log('get start OK!!');
       } else {
         // Responds with '403 Forbidden' if verify tokens do not match
         res.sendStatus(403);      
@@ -140,7 +141,7 @@ function handlePostback(sender_psid, received_postback) {
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
-    let PAGE_ACCESS_TOKEN = <PAGE_ACCESS_TOKEN>;
+    let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
     console.log(response);
 
     // Construct the message body
@@ -164,4 +165,30 @@ function callSendAPI(sender_psid, response) {
         console.error("Unable to send message:" + err);
       }
     }); 
+}
+
+
+function getStart() {
+  let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
+
+  // Construct the message body
+  let request_body = { 
+    "get_started":{
+      "payload":"<GET_STARTED_PAYLOAD>"
+    }
+  }
+
+  // Send the HTTP request to the Messenger Platform
+  request({
+    "uri": "https://graph.facebook.com/v2.6/me/messages",
+    "qs": { "access_token": PAGE_ACCESS_TOKEN},
+    "method": "POST",
+    "json": request_body
+  }, (err, res, body) => {
+    if (!err) {
+      console.log('Get Start!')
+    } else {
+      console.error("Unable to get start:" + err);
+    }
+  }); 
 }
