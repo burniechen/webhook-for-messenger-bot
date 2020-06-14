@@ -136,16 +136,12 @@ function handlePostback(sender_psid, received_postback) {
 				"type":"template",
 				"payload":{
 					"template_type":"button",
+					"text":"What do you want to do next?",
 					"buttons":[
 						{
-							"type":"postback",
-							"title":"庫存查詢",
-							"payload":"items_search"
-						},
-						{
-							"type":"postback",
-							"title":"圖表查詢",
-							"payload":"charts_search"
+							"type":"web_url",
+							"url":"https://www.messenger.com",
+							"title":"Visit Messenger"
 						}
 					]
 				}
