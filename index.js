@@ -80,30 +80,7 @@ function handleMessage(sender_psid, received_message) {
     let response;
   
     // Check if the message contains text
-	if (received_message.payload) {
-		response = {
-			"recipient":{
-			"id":sender_psid
-			},
-			"message":{
-				"attachment":{
-					"type":"template",
-					"payload":{
-						"template_type":"button",
-						"text":"Try the postback button!",
-						"buttons":[
-							{
-								"type":"postback",
-								"title":"Postback Button",
-								"payload":"Postback_button"
-							}
-						]
-					}
-				}
-			}
-		}
-	}
-	else if(received_message.text) {    
+	if(received_message.text) {    
   
         // Create the payload for a basic text message
         response = {
@@ -153,9 +130,33 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    if (payload === 'yes') {
+	if (payload) {
+		response = {
+			"recipient":{
+			"id":sender_psid
+			},
+			"message":{
+				"attachment":{
+					"type":"template",
+					"payload":{
+						"template_type":"button",
+						"text":"Try the postback button!",
+						"buttons":[
+							{
+								"type":"postback",
+								"title":"Postback Button",
+								"payload":"Postback_button"
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+	else if(payload === 'yes') {
         response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
+	} 
+	else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     }
     // Send the message to acknowledge the postback
