@@ -27,7 +27,8 @@ app.post('/profile', (req, res) => {
           
             // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
-            console.log('Sender PSID: ' + sender_psid);
+			console.log('Sender PSID: ' + sender_psid);
+			callFastReply(sender_psid)
           
             // Check if the event is a message or postback and
             // pass the event to the appropriate handler function
@@ -169,6 +170,47 @@ function callSendAPI(sender_psid, response) {
         "id": sender_psid
       },
       "message": response
+    }
+	console.log(JSON.stringify(request_body))
+    // Send the HTTP request to the Messenger Platform
+    request({
+      "uri": "https://graph.facebook.com/v2.6/me/messages",
+      "qs": { "access_token": PAGE_ACCESS_TOKEN},
+      "method": "POST",
+      "json": request_body
+    }, (err, res, body) => {
+      if (!err) {
+        console.log('message sent!')
+      } else {
+        console.error("Unable to send message:" + err);
+      }
+    }); 
+}
+
+function callFastReply(sender_psid) {
+    let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
+
+    // Construct the message body
+    let request_body = {
+		"recipient": {
+			"id": sender_psid
+		},
+		"messaging_type": "RESPONSE",
+		"message":{
+		"text": "Pick a color:",
+		"quick_replies":[
+				{
+					"content_type":"text",
+					"title":"Red",
+					"payload":"<POSTBACK_PAYLOAD>",
+				},
+				{
+					"content_type":"text",
+					"title":"Green",
+					"payload":"<POSTBACK_PAYLOAD>",
+				}
+			]
+		}
     }
 	console.log(JSON.stringify(request_body))
     // Send the HTTP request to the Messenger Platform
