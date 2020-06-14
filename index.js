@@ -80,13 +80,37 @@ function handleMessage(sender_psid, received_message) {
     let response;
   
     // Check if the message contains text
-    if (received_message.text) {    
+	if (received_message.payload) {
+		response = {
+			"recipient":{
+			"id":sender_psid
+			},
+			"message":{
+				"attachment":{
+					"type":"template",
+					"payload":{
+						"template_type":"button",
+						"text":"Try the postback button!",
+						"buttons":[
+							{
+								"type":"postback",
+								"title":"Postback Button",
+								"payload":"Postback_button"
+							}
+						]
+					}
+				}
+			}
+		}
+	}
+	else if(received_message.text) {    
   
         // Create the payload for a basic text message
         response = {
             "text": `You sent the message: "${received_message.text}". Now send me an image!`
         }
-    }  else if (received_message.attachments) {
+	}  
+	else if (received_message.attachments) {
   
         // Gets the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
@@ -129,18 +153,9 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    if (payload) {
-		// get start!!
-		response = {
-			"type": "postback",
-			"title": "庫存查詢",
-			"payload": "item_search"
-		}
-    }
-    else if (payload === 'yes') {
+    if (payload === 'yes') {
         response = { "text": "Thanks!" }
-    } 
-    else if (payload === 'no') {
+    } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     }
     // Send the message to acknowledge the postback
