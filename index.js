@@ -79,6 +79,7 @@ function handleMessage(sender_psid, received_message) {
 	let response;
 	let msg_text;
 	let reply_key;
+	let send = true;
   
     // Check if the message contains text
 	if(received_message.text) {    
@@ -87,7 +88,10 @@ function handleMessage(sender_psid, received_message) {
 		reply_key = getKeyByValue(reply.init_msg, msg_text);
 
 		if (reply_key) response = reply.init_reply[reply_key];
-		else response = {"text": "請等候回復"};
+		else {
+			send = false;
+			callFastReply(sender_psid);
+		}
 	}  
 	else if (received_message.attachments) {
   
@@ -121,7 +125,7 @@ function handleMessage(sender_psid, received_message) {
     }
     
     // Sends the response message
-    callSendAPI(sender_psid, response);    
+    if (send) callSendAPI(sender_psid, response);    
 }
 
 // Handles messaging_postbacks events
@@ -136,7 +140,6 @@ function handlePostback(sender_psid, received_postback) {
 
     // Set the response based on the postback payload
 	if (payload === '<postback_payload>') {
-		console.log("callFastReply");
 		send = false;
 		callFastReply(sender_psid);
 	}
