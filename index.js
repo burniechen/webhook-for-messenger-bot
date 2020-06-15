@@ -1,4 +1,4 @@
-import * as reply from "./reply.js";
+// import * as reply from "./reply.js";
 import express from 'express';
 import bodyParser from 'body-parser';
 import request from 'request';
@@ -82,7 +82,7 @@ function handleMessage(sender_psid, received_message) {
 
 	let response;
 	let msg_text;
-	let reply_key;
+	// let reply_key;
 	let send = true;
   
     // Check if the message contains text
@@ -90,10 +90,11 @@ function handleMessage(sender_psid, received_message) {
 		msg_text = received_message.text;
 		let words = msg_text.split(']')
 
-		reply_key = getKeyByValue(reply.init_msg, msg_text);
+		// reply_key = getKeyByValue(reply.init_msg, msg_text);
 
-		if (reply_key) response = reply.init_reply[reply_key];
-		else if (words[0] === '[Bot') {
+		// if (reply_key) response = reply.init_reply[reply_key];
+
+		if (words[0] === '[Bot') {
 			send = false;
 		}
 		else {
@@ -155,13 +156,13 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
-	let reply_key;
+	// let reply_key;
 	let response;
 	let send = true;
 	  
     // Get the payload for the postback
 	let payload = received_postback.payload;
-	reply_key = getKeyByValue(reply.init_msg, payload);
+	// reply_key = getKeyByValue(reply.init_msg, payload);
 
     // Set the response based on the postback payload
 	if (payload === '<GET_STARTED_PAYLOAD>') {
@@ -176,7 +177,7 @@ function handlePostback(sender_psid, received_postback) {
         response = { "text": "Oops, try sending another image." }
 	}
 
-	else if (reply_key) response = reply.init_reply[reply_key];
+	// else if (reply_key) response = reply.init_reply[reply_key];
 
 	else {
 		console.log("else: callFastReply");
