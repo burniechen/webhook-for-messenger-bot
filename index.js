@@ -126,14 +126,13 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
-	let msg_text;
 	let reply_key;
 	let response;
 	let send = true;
 	  
     // Get the payload for the postback
 	let payload = received_postback.payload;
-	reply_key = getKeyByValue(reply.init_msg, msg_text);
+	reply_key = getKeyByValue(reply.init_msg, payload);
 
     // Set the response based on the postback payload
 	if (payload === '<postback_payload>') {
