@@ -98,11 +98,12 @@ function handleMessage(sender_psid, received_message) {
   
         // Gets the URL of the message attachment
 		let attachment_url = received_message.attachments[0].payload.url;
-		console.log(attachment_url)
+		console.log(attachment_url);
 		axios.post('https://5e8643c72f31.ngrok.io/rest/image', {
-			image: attachment_url
+			"image": attachment_url
 		})
 		.then(function (res) {
+			console.log(res);
 			response = {
 				"text": res.data.data['text']
 			}
