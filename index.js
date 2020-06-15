@@ -1,3 +1,4 @@
+import * as reply from reply.js;
 'use strict';
 
 // Imports dependencies and set up http server
@@ -77,15 +78,15 @@ app.get('/profile', (req, res) => {
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
 
-    let response;
+	let response;
+	let msg_text;
+	let reply_key;
   
     // Check if the message contains text
 	if(received_message.text) {    
-  
-        // Create the payload for a basic text message
-        response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an image!`
-        }
+		msg_text = received_message.text;
+		reply_key = getKeyByValue(reply.init_msg, msg_text);
+		response = reply.init_reply.reply_key;
 	}  
 	else if (received_message.attachments) {
   
@@ -218,4 +219,8 @@ function callFastReply(sender_psid) {
         console.error("Unable to send message:" + err);
       }
     }); 
+}
+
+function getKeyByValue(object, value) {
+	return Object.keys(object).find(key => object[key] === value);
 }
