@@ -1,4 +1,4 @@
-import * as reply from reply.js;
+import * as reply from "./reply.js";
 'use strict';
 
 // Imports dependencies and set up http server
