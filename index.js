@@ -83,7 +83,7 @@ function handleMessage(sender_psid, received_message) {
 	let send = true;
   
     // Check if the message contains text
-	if(received_message.text && !received_message.control) {    
+	if(received_message.text) {    
 		msg_text = received_message.text;
 
 		reply_key = getKeyByValue(reply.init_msg, msg_text);
@@ -107,8 +107,7 @@ function handleMessage(sender_psid, received_message) {
 		.then(function (res) {
 			console.log(res.data);
 			response = {
-				"text": res.data.data['text'],
-				"control": true
+				"text": res.data.data['text'] + '$marker',
 			}
 			
 			callSendAPI(sender_psid, response); 
