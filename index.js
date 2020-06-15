@@ -83,14 +83,11 @@ function handleMessage(sender_psid, received_message) {
     // Check if the message contains text
 	if(received_message.text) {    
 		msg_text = received_message.text;
-		try {
-			reply_key = getKeyByValue(reply.init_msg, msg_text);
-			response = reply.init_reply.reply_key;
-		} catch (e) {
-			response = {
-				"text": "請等候回復"
-			};
-		}
+
+		reply_key = getKeyByValue(reply.init_msg, msg_text);
+
+		if (reply_key) response = reply.init_reply.reply_key;
+		else response = {"text": "請等候回復"};
 	}  
 	else if (received_message.attachments) {
   
