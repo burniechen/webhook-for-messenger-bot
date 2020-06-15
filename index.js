@@ -88,12 +88,12 @@ function handleMessage(sender_psid, received_message) {
     // Check if the message contains text
 	if(received_message.text) {    
 		msg_text = received_message.text;
-		let words = msg_text.split(':')
+		let words = msg_text.split(']')
 
 		reply_key = getKeyByValue(reply.init_msg, msg_text);
 
 		if (reply_key) response = reply.init_reply[reply_key];
-		else if (words[0] === '[Bot]') {
+		else if (words[0] === '[Bot') {
 			send = false;
 		}
 		else {
@@ -114,7 +114,7 @@ function handleMessage(sender_psid, received_message) {
 		.then(function (res) {
 			console.log(res.data);
 			response = {
-				"text": `[Bot]:${res.data.data['text']}`,
+				"text": `[Bot]${res.data.data['text']}`,
 			}
 			
 			callSendAPI(sender_psid, response); 
