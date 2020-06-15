@@ -1,12 +1,11 @@
 import * as reply from "./reply.js";
 import express from 'express';
 import bodyParser from 'body-parser';
+import request from 'request';
 'use strict';
 
 // Imports dependencies and set up http server
 const app = express().use(bodyParser.json()); // creates express http server
-
-const request = require('request');
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
