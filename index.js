@@ -102,9 +102,8 @@ function handleMessage(sender_psid, received_message) {
 			image: attachment_url
 		})
 		.then(function (res) {
-			console.log(res.data.data['text']);
 			response = res.data.data['text']
-			send = False;
+			send = false;
 			callSendAPI(sender_psid, response); 
 		})
 		.catch(function (error) {
