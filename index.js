@@ -90,6 +90,7 @@ function handleMessage(sender_psid, received_message) {
 
 		if (reply_key) response = reply.init_reply[reply_key];
 		else {
+			console.log("received_message.text: callFastReply");
 			send = false;
 			callFastReply(sender_psid);
 		}
@@ -156,7 +157,8 @@ function handlePostback(sender_psid, received_postback) {
 	reply_key = getKeyByValue(reply.init_msg, payload);
 
     // Set the response based on the postback payload
-	if (payload === '<postback_payload>') {
+	if (payload === '<GET_STARTED_PAYLOAD>') {
+		console.log("GET_STARTED_PAYLOAD: callFastReply");
 		send = false;
 		callFastReply(sender_psid);
 	}
@@ -170,7 +172,7 @@ function handlePostback(sender_psid, received_postback) {
 	else if (reply_key) response = reply.init_reply[reply_key];
 
 	else {
-		console.log("callFastReply");
+		console.log("else: callFastReply");
 		send = false;
 		callFastReply(sender_psid);
 	}
