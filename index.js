@@ -108,7 +108,7 @@ function handleMessage(sender_psid, received_message) {
 			console.log(res.data);
 			response = {
 				"text": res.data.data['text'],
-				"control": false
+				"control": true
 			}
 			
 			callSendAPI(sender_psid, response); 
