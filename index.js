@@ -149,8 +149,12 @@ function handlePostback(sender_psid, received_postback) {
 	}
 
 	else if (reply_key) response = reply.init_reply[reply_key];
-	
-	else response = {"text": "請等候回復"};
+
+	else {
+		console.log("callFastReply");
+		send = false;
+		callFastReply(sender_psid);
+	}
 	
     // Send the message to acknowledge the postback
     if (send) callSendAPI(sender_psid, response);
