@@ -224,7 +224,6 @@ function callFastReply(sender_psid) {
 		},
 		"messaging_type": "RESPONSE",
 		"message":{
-			"text": "想知道：",
 			"quick_replies":[
 				{
 					"content_type":"text",
@@ -234,11 +233,6 @@ function callFastReply(sender_psid) {
 				{
 					"content_type":"text",
 					"title":"圖表查詢",
-					"payload":"<POSTBACK_PAYLOAD>",
-				},
-				{
-					"content_type":"text",
-					"title":"其他",
 					"payload":"<POSTBACK_PAYLOAD>",
 				}
 			]
