@@ -85,11 +85,8 @@ function handleMessage(sender_psid, received_message) {
 		msg_text = received_message.text;
 
 		reply_key = getKeyByValue(reply.init_msg, msg_text);
-		console.log("get key: "+reply_key);
-		console.log("reply_ob: "+JSON.stringify(reply.init_reply));
-		console.log("reply: "+reply.init_reply[reply_key]);
 
-		if (reply_key) response = reply.init_reply.reply_key;
+		if (reply_key) response = reply.init_reply[reply_key];
 		else response = {"text": "請等候回復"};
 	}  
 	else if (received_message.attachments) {
