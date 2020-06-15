@@ -1,11 +1,10 @@
 import * as reply from "./reply.js";
+import express from 'express';
+import bodyParser from 'body-parser';
 'use strict';
 
 // Imports dependencies and set up http server
-const
-  express = require('express'),
-  bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()); // creates express http server
+const app = express().use(bodyParser.json()); // creates express http server
 
 const request = require('request');
 
