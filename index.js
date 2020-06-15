@@ -85,10 +85,16 @@ function handleMessage(sender_psid, received_message) {
     // Check if the message contains text
 	if(received_message.text) {    
 		msg_text = received_message.text;
+		let words = msg_text.split('&&&')
+		if (words[1]) msg_text = words[1]
 
 		reply_key = getKeyByValue(reply.init_msg, msg_text);
 
 		if (reply_key) response = reply.init_reply[reply_key];
+		else if (words[1]) {
+			console.log("Don't send: " + words[1]);
+			send = false;
+		}
 		else {
 			console.log("received_message.text: callFastReply");
 			send = false;
@@ -107,7 +113,7 @@ function handleMessage(sender_psid, received_message) {
 		.then(function (res) {
 			console.log(res.data);
 			response = {
-				"text": res.data.data['text'] + '$marker',
+				"text": 'marker&&&' + res.data.data['text'],
 			}
 			
 			callSendAPI(sender_psid, response); 
