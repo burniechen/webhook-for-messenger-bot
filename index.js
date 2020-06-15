@@ -84,9 +84,14 @@ function handleMessage(sender_psid, received_message) {
   
     // Check if the message contains text
 	if(received_message.text) {    
-		msg_text = received_message.text;
-		reply_key = getKeyByValue(reply.init_msg, msg_text);
-		response = reply.init_reply.reply_key;
+		// msg_text = received_message.text;
+		// reply_key = getKeyByValue(reply.init_msg, msg_text);
+		// response = reply.init_reply.reply_key;
+        // Create the payload for a basic text message
+        response = {
+            "text": `You sent the message: "${received_message.text}". Now send me an image!`
+		}
+		console.log(JSON.stringify(reply.init_reply));
 	}  
 	else if (received_message.attachments) {
   
