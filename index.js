@@ -224,6 +224,7 @@ function callFastReply(sender_psid) {
 		},
 		"messaging_type": "RESPONSE",
 		"message":{
+			"text": "",
 			"quick_replies":[
 				{
 					"content_type":"text",
