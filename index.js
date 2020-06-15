@@ -126,11 +126,14 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
+	let msg_text;
+	let reply_key;
 	let response;
 	let send = true;
-  
+	  
     // Get the payload for the postback
-    let payload = received_postback.payload;
+	let payload = received_postback.payload;
+	reply_key = getKeyByValue(reply.init_msg, msg_text);
 
     // Set the response based on the postback payload
 	if (payload === '<postback_payload>') {
@@ -143,7 +146,12 @@ function handlePostback(sender_psid, received_postback) {
 	} 
 	else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
-    }
+	}
+
+	else if (reply_key) response = reply.init_reply[reply_key];
+	
+	else response = {"text": "請等候回復"};
+	
     // Send the message to acknowledge the postback
     if (send) callSendAPI(sender_psid, response);
 }
