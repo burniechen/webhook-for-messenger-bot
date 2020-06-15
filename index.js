@@ -102,7 +102,7 @@ function handleMessage(sender_psid, received_message) {
 			image: attachment_url
 		})
 		.then(function (res) {
-			response = res.data.data['text']
+			response = res.data.data
 			send = false;
 			callSendAPI(sender_psid, response); 
 		})
