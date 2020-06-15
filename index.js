@@ -171,8 +171,7 @@ function callSendAPI(sender_psid, response) {
     let request_body = {
       "recipient": {
         "id": sender_psid
-	  },
-	  "sender_action":"typing_on",
+      },
       "message": response
     }
 	console.log(JSON.stringify(request_body))
@@ -199,7 +198,6 @@ function callFastReply(sender_psid) {
 		"recipient": {
 			"id": sender_psid
 		},
-		"sender_action":"typing_on",
 		"messaging_type": "RESPONSE",
 		"message":{
 			"text": "想知道：",
