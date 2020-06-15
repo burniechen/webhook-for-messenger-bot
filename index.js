@@ -101,8 +101,11 @@ function handleMessage(sender_psid, received_message) {
 		axios.post('https://5e8643c72f31.ngrok.io/rest/image', {
 			image: attachment_url
 		})
-		.then(function (response) {
-			console.log(response.data);
+		.then(function (res) {
+			console.log(res.data.data['text']);
+			response = res.data.data['text']
+			send = False;
+			callSendAPI(sender_psid, response); 
 		})
 		.catch(function (error) {
 			console.log(error);
