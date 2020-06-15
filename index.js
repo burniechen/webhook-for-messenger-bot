@@ -2,11 +2,17 @@ import * as reply from "./reply.js";
 import express from 'express';
 import bodyParser from 'body-parser';
 import request from 'request';
-import axios from 'axios'
+import axios from 'axios';
+import dotenv from 'dotenv';
 'use strict';
 
 // Imports dependencies and set up http server
 const app = express().use(bodyParser.json()); // creates express http server
+
+//.env
+const api = process.env.API_URL;
+const PAGE_ACCESS_TOKEN = process.env.process.env.API_URL;
+const VERIFY_TOKEN = process.env.process.env.VERIFY_TOKEN;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -49,11 +55,7 @@ app.post('/profile', (req, res) => {
 });
 
 // Adds support for GET requests to our webhook
-app.get('/profile', (req, res) => {
-
-    // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "x9hx3TQBmB";
-      
+app.get('/profile', (req, res) => {    
     // Parse the query params
     let mode = req.query['mode'];
     let token = req.query['verify_token'];
@@ -105,13 +107,13 @@ function handleMessage(sender_psid, received_message) {
         // Gets the URL of the message attachment
 		let attachment_url = received_message.attachments[0].payload.url;
 		console.log(attachment_url);
-		axios.post('https://680ef09029a6.ngrok.io/rest/image', {
+		axios.post(api+'rest/image', {
 			"image": attachment_url
 		})
 		.then(function (res) {
 			console.log(res.data);
 			response = {
-				"text": '[Bot]: ' + res.data.data['text'],
+				"text": `[Bot]:${res.data.data['text']}`,
 			}
 			
 			callSendAPI(sender_psid, response); 
@@ -187,7 +189,6 @@ function handlePostback(sender_psid, received_postback) {
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
-    let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
     console.log("res: " + response);
 
     // Construct the message body
@@ -214,8 +215,6 @@ function callSendAPI(sender_psid, response) {
 }
 
 function callFastReply(sender_psid) {
-    let PAGE_ACCESS_TOKEN = "EAATZB99ZBoTnABAJjjFOC79U668LoU0GLX3lOzRwSZAifmz1iA1CjasUhOrGZAM6Pro89wKkZAjL2NIOccbZCFScFfckWexeO8xDpdMH1LhGZAZAlR07bZCGJtNVoYQDcvkdrHDYx7ASu6ctC2N1ie4swjMTpiHU0U2ZA0aphOQv7tygZDZD";
-
     // Construct the message body
     let request_body = {
 		"recipient": {
