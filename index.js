@@ -11,8 +11,8 @@ const app = express().use(bodyParser.json()); // creates express http server
 
 //.env
 const api = process.env.API_URL;
-const PAGE_ACCESS_TOKEN = process.env.process.env.API_URL;
-const VERIFY_TOKEN = process.env.process.env.VERIFY_TOKEN;
+const PAGE_ACCESS_TOKEN = process.env.API_URL;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
