@@ -10,6 +10,7 @@ import dotenv from 'dotenv';
 const app = express().use(bodyParser.json()); // creates express http server
 
 //.env
+dotenv.config();
 const api = process.env.API_URL;
 const PAGE_ACCESS_TOKEN = process.env.API_URL;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
