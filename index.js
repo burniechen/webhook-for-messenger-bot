@@ -224,7 +224,7 @@ function callFastReply(sender_psid) {
 		},
 		"messaging_type": "RESPONSE",
 		"message":{
-			"text": "",
+			"text": "其他查詢：",
 			"quick_replies":[
 				{
 					"content_type":"text",
